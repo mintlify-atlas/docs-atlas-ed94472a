@@ -1,0 +1,382 @@
+---
+title: US states data
+description: View COVID-19 statistics for all United States regions and territories
+---
+
+The states command provides detailed COVID-19 statistics for all US states and territories. This is particularly useful for monitoring the pandemic situation across different regions of the United States.
+
+## Basic usage
+
+```bash
+corona states
+```
+
+This displays a comprehensive table with COVID-19 data for all US states, including:
+
+- State name
+- Total cases
+- Cases reported today
+- Total deaths
+- Deaths reported today
+- Active cases
+- Cases per million population
+
+## Display options
+
+The states command supports all global display options:
+
+<CodeGroup>
+```bash Default colored output
+corona states
+```
+
+```bash Single color
+corona states --xcolor
+corona states -x
+```
+
+```bash Minimal output
+corona states --minimal
+corona states -m
+```
+
+```bash JSON format
+corona states --json
+corona states -j
+```
+</CodeGroup>
+
+## Sorting states data
+
+<ParamField path="sort" type="string" default="cases">
+  Sort states by any available field
+</ParamField>
+
+You can sort the states data by any field to identify the most affected regions:
+
+<CodeGroup>
+```bash By total cases (default)
+corona states
+corona states --sort cases
+corona states -s cases
+```
+
+```bash By new cases today
+corona states --sort cases-today
+corona states -s cases-today
+```
+
+```bash By total deaths
+corona states --sort deaths
+corona states -s deaths
+```
+
+```bash By new deaths today
+corona states --sort deaths-today
+corona states -s deaths-today
+```
+
+```bash By active cases
+corona states --sort active
+corona states -s active
+```
+
+```bash By cases per million
+corona states --sort per-million
+corona states -s per-million
+```
+
+```bash Alphabetically
+corona states --sort state
+```
+</CodeGroup>
+
+## Filtering results
+
+### Limit entries
+
+Display only the top N states:
+
+```bash
+# Top 10 affected states
+corona states --limit 10
+corona states -l 10
+
+# Top 5 by deaths
+corona states --sort deaths --limit 5
+corona states -s deaths -l 5
+
+# Top 20 by active cases
+corona states --sort active --limit 20
+corona states -s active -l 20
+```
+
+### Reverse order
+
+View states with the lowest values:
+
+```bash
+# States with fewest cases
+corona states --sort cases --reverse
+corona states -s cases -r
+
+# Bottom 10 by active cases
+corona states --sort active --reverse --limit 10
+corona states -s active -r -l 10
+```
+
+## Visual representations
+
+### Bar charts for states
+
+<ParamField path="bar" type="boolean" default="false">
+  Display states data as bar charts for visual comparison
+</ParamField>
+
+```bash
+# Default bar chart for states
+corona states --bar
+corona states -b
+
+# Top 10 states by deaths
+corona states --bar --sort deaths --limit 10
+corona states -b -s deaths -l 10
+
+# Active cases comparison
+corona states --bar --sort active
+corona states -b -s active
+```
+
+## Real-world examples
+
+<CodeGroup>
+```bash Example 1: Most affected states
+# Top 10 states by total cases
+corona states --limit 10
+```
+
+```bash Example 2: New cases tracking
+# States with most new cases today
+corona states --sort cases-today --limit 15
+corona states -s cases-today -l 15
+```
+
+```bash Example 3: Death toll analysis
+# Top 10 states by deaths
+corona states --sort deaths --limit 10
+corona states -s deaths -l 10
+```
+
+```bash Example 4: Active cases monitoring
+# States with highest active cases
+corona states --sort active --limit 20
+corona states -s active -l 20
+```
+
+```bash Example 5: Population-adjusted view
+# States by cases per million (normalized)
+corona states --sort per-million --limit 15
+corona states -s per-million -l 15
+```
+
+```bash Example 6: Visual comparison
+# Bar chart of top 8 states
+corona states --bar --limit 8
+corona states -b -l 8
+```
+
+```bash Example 7: Data export
+# Export all states data to JSON
+corona states --json > us-states-covid.json
+```
+
+```bash Example 8: Least affected states
+# States with lowest case counts
+corona states --sort cases --reverse --limit 10
+corona states -s cases -r -l 10
+```
+
+```bash Example 9: Combined filtering
+# Top 5 states by deaths, reversed order, single color
+corona states -s deaths -l 5 -r -x
+```
+
+```bash Example 10: Clean output for scripts
+# Minimal output for automation
+corona states --minimal --limit 10
+corona states -m -l 10
+```
+</CodeGroup>
+
+## Understanding the output
+
+The states table includes:
+
+- **State**: Full state name or territory
+- **Cases**: Total confirmed COVID-19 cases since tracking began
+- **Cases (Today)**: New cases reported in the last 24 hours
+- **Deaths**: Total deaths attributed to COVID-19
+- **Deaths (Today)**: New deaths reported in the last 24 hours
+- **Active**: Currently active cases in the state
+- **Per Million**: Cases per million residents (population-normalized)
+
+<Note>
+The states data includes all 50 US states plus territories like Puerto Rico, Guam, US Virgin Islands, and others.
+</Note>
+
+## Use cases
+
+### Regional monitoring
+
+Track COVID-19 trends in specific regions:
+
+```bash
+# Monitor northeastern states (check top states)
+corona states --sort cases --limit 10
+```
+
+### Comparative analysis
+
+Compare states with similar populations:
+
+```bash
+# Use per-million metric for fair comparison
+corona states --sort per-million --limit 20
+```
+
+### Hotspot identification
+
+Identify emerging hotspots:
+
+```bash
+# Sort by new cases to find current hotspots
+corona states --sort cases-today
+```
+
+### Resource allocation
+
+Help inform resource allocation decisions:
+
+```bash
+# States with most active cases may need resources
+corona states --sort active --limit 15
+```
+
+## Combining with other commands
+
+You can run multiple commands to get a complete picture:
+
+<CodeGroup>
+```bash National + States overview
+# First check nationwide data
+corona usa
+
+# Then drill down to states
+corona states --limit 10
+```
+
+```bash Full analysis workflow
+# Worldwide perspective
+corona --limit 10
+
+# USA position
+corona usa
+
+# State-level breakdown
+corona states --sort active --limit 15
+```
+</CodeGroup>
+
+## Tips
+
+<Tip>
+Use `--sort cases-today` to identify current outbreak hotspots:
+```bash
+corona states --sort cases-today --limit 10
+```
+</Tip>
+
+<Tip>
+For fair comparisons between states of different sizes, use per-million metric:
+```bash
+corona states --sort per-million
+```
+</Tip>
+
+<Tip>
+Bar charts provide quick visual insights:
+```bash
+corona states --bar --sort deaths --limit 10
+```
+</Tip>
+
+<Tip>
+Export states data for your own analysis:
+```bash
+corona states --json | jq '.[] | select(.state | contains("California"))'
+```
+</Tip>
+
+<Tip>
+Combine multiple flags for focused results:
+```bash
+# Top 5 states by active cases, minimal output
+corona states -s active -l 5 -m
+```
+</Tip>
+
+## Data sources
+
+States data is aggregated from:
+- State health departments
+- CDC (Centers for Disease Control and Prevention)
+- Local health authorities
+- COVID Tracking Project
+
+<Note>
+Data is updated regularly throughout the day. The last update timestamp is displayed at the bottom of the output.
+</Note>
+
+## Frequently compared metrics
+
+### Total cases vs cases per million
+
+**Total cases** shows absolute numbers:
+```bash
+corona states --sort cases
+```
+
+**Cases per million** normalizes by population:
+```bash
+corona states --sort per-million
+```
+
+Use per-million for fair comparisons between states with different populations.
+
+### Active cases vs total cases
+
+**Total cases** includes all historical cases:
+```bash
+corona states --sort cases
+```
+
+**Active cases** shows current burden:
+```bash
+corona states --sort active
+```
+
+Active cases better represent current healthcare system load.
+
+### Cases today vs total cases
+
+**Cases today** shows current trends:
+```bash
+corona states --sort cases-today
+```
+
+**Total cases** shows cumulative impact:
+```bash
+corona states --sort cases
+```
+
+Use "cases today" to identify emerging hotspots.

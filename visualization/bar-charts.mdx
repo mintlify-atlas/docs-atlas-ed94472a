@@ -1,0 +1,181 @@
+---
+title: Bar charts
+description: Visualize COVID-19 statistics using interactive bar charts with the --bar flag
+---
+
+The Corona CLI provides interactive bar chart visualization to display COVID-19 statistics across countries or US states. Bar charts offer an intuitive way to compare data visually.
+
+## Basic usage
+
+Display bar charts for the top 10 countries sorted by total cases:
+
+```bash
+corona --bar
+```
+
+Or use the short alias:
+
+```bash
+corona -b
+```
+
+<Note>
+Bar charts are limited to a maximum of 10 entries for optimal visualization. The limit parameter will automatically cap at 10 even if you specify a higher value.
+</Note>
+
+## What is visualized
+
+By default, bar charts display three categories of data for each country or state:
+
+- **Cases** (cyan) - Total confirmed cases
+- **Deaths** (red) - Total deaths
+- **Recovered** (green) - Total recovered cases
+
+When using a custom sort parameter (other than cases), the chart displays only the selected metric.
+
+## Sorting bar charts
+
+You can sort bar chart data by any metric using the `--sort` flag:
+
+```bash
+# Sort by deaths
+corona --bar --sort deaths
+corona -b -s deaths
+
+# Sort by recovered cases
+corona --bar --sort recovered
+corona -b -s recovered
+
+# Sort by active cases
+corona --bar --sort active
+corona -b -s active
+
+# Sort by critical cases
+corona --bar --sort critical
+```
+
+### Available sort options
+
+- `cases` - Total confirmed cases (default)
+- `cases-today` - New cases today
+- `deaths` - Total deaths
+- `deaths-today` - New deaths today
+- `recovered` - Total recovered
+- `active` - Active cases
+- `critical` - Critical cases
+- `per-million` - Cases per million population
+
+## Limiting results
+
+Limit the number of countries or states displayed (maximum 10):
+
+```bash
+# Show top 5 countries by deaths
+corona --bar --sort deaths --limit 5
+corona -b -s deaths -l 5
+
+# Show top 3 countries by active cases
+corona --bar --sort active --limit 3
+corona -b -s active -l 3
+```
+
+## Reversing order
+
+Reverse the display order to show data in ascending order:
+
+```bash
+# Show countries with lowest deaths
+corona --bar --sort deaths --reverse
+corona -b -s deaths -r
+
+# Show 5 countries with lowest case counts
+corona --bar --sort cases --limit 5 --reverse
+corona -b -s cases -l 5 -r
+```
+
+## US states bar charts
+
+Visualize data for US states instead of countries:
+
+```bash
+# Bar chart for all US states
+corona states --bar
+
+# Top 5 states by deaths
+corona states --bar --sort deaths --limit 5
+corona states -b -s deaths -l 5
+
+# States sorted by active cases
+corona states --bar --sort active
+```
+
+<Note>
+When displaying US states data, the "recovered" metric is calculated as `cases - active - deaths` since some states may not report recovered cases directly.
+</Note>
+
+## Logarithmic scale
+
+Apply logarithmic scaling to the bar chart data using the `--log` flag:
+
+```bash
+# Bar chart with logarithmic scale
+corona --bar --log
+corona -b -g
+
+# Useful for comparing countries with vastly different case counts
+corona --bar --sort cases --log
+```
+
+<Tip>
+Logarithmic scale is particularly useful when comparing regions with vastly different numbers, making it easier to see patterns across all entries rather than having small values dwarfed by large ones.
+</Tip>
+
+## Interactive controls
+
+Once the bar chart is displayed, you can exit the visualization using:
+
+- `Escape` key
+- `q` key
+- `Ctrl+C`
+- `Enter` key
+- `Space` key
+
+## Chart information
+
+The bar chart displays:
+
+- The sort metric used
+- Whether the order is reversed
+- Color-coded legend (Cases/cyan, Deaths/red, Recovered/green)
+- Bar labels with country or state names
+- Interactive terminal-based visualization using blessed-contrib
+
+## Examples
+
+<Steps>
+
+### Compare top countries by total cases
+
+```bash
+corona --bar
+```
+
+Displays a stacked bar chart showing cases, deaths, and recovered for the top 10 countries.
+
+### Find states with most deaths
+
+```bash
+corona states --bar --sort deaths --limit 5
+```
+
+Shows the 5 US states with the highest death counts.
+
+### Analyze critical cases with logarithmic scale
+
+```bash
+corona --bar --sort critical --log
+```
+
+Displays critical cases across countries with logarithmic scaling for better comparison.
+
+</Steps>

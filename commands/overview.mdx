@@ -1,0 +1,140 @@
+---
+title: Commands overview
+description: Complete reference for all Corona CLI commands to track COVID-19 data in real-time
+---
+
+Corona CLI provides a simple command structure to track COVID-19 statistics across the world. All commands support various flags for sorting, filtering, and visualizing data.
+
+## Command structure
+
+The basic syntax for all Corona CLI commands follows this pattern:
+
+```bash
+corona <command> [--option]
+```
+
+## Available commands
+
+<CardGroup cols={2}>
+  <Card title="Worldwide data" icon="globe" href="/commands/worldwide">
+    Display COVID-19 statistics for all countries
+  </Card>
+  <Card title="Country data" icon="flag" href="/commands/country">
+    Get detailed statistics for a specific country
+  </Card>
+  <Card title="US states data" icon="map-location-dot" href="/commands/states">
+    View COVID-19 data for all United States regions
+  </Card>
+</CardGroup>
+
+## Global options
+
+All commands support the following options:
+
+<ParamField path="sort" type="string" default="cases">
+  Sort data by specific field. Available values:
+  - `country` - Sort alphabetically by country name
+  - `cases` - Total confirmed cases
+  - `cases-today` - New cases reported today
+  - `deaths` - Total deaths
+  - `deaths-today` - New deaths reported today
+  - `recovered` - Total recovered cases
+  - `active` - Currently active cases
+  - `critical` - Critical condition cases
+  - `per-million` - Cases per million population
+</ParamField>
+
+<ParamField path="reverse" type="boolean" default="false">
+  Reverse the sort order
+</ParamField>
+
+<ParamField path="limit" type="number" default="unlimited">
+  Limit the number of entries displayed
+</ParamField>
+
+<ParamField path="bar" type="boolean" default="false">
+  Display statistics as bar charts instead of tables
+</ParamField>
+
+<ParamField path="chart" type="boolean" default="false">
+  Display historical line chart for a country (requires country command)
+</ParamField>
+
+<ParamField path="log" type="boolean" default="false">
+  Use logarithmic scale for charts (used with --chart)
+</ParamField>
+
+<ParamField path="xcolor" type="boolean" default="false">
+  Display output in single color instead of color-coded
+</ParamField>
+
+<ParamField path="minimal" type="boolean" default="false">
+  Show minimal output without additional formatting
+</ParamField>
+
+<ParamField path="json" type="boolean" default="false">
+  Output data in JSON format only
+</ParamField>
+
+## Quick examples
+
+<CodeGroup>
+```bash Worldwide data
+# Show all countries sorted by total cases
+corona
+
+# Top 10 countries by deaths
+corona --sort deaths --limit 10
+```
+
+```bash Country-specific
+# Get data for China
+corona china
+
+# USA with historical chart
+corona usa --chart
+```
+
+```bash US States
+# All states data
+corona states
+
+# Top 5 states by active cases
+corona states --sort active --limit 5
+```
+
+```bash Bar charts
+# Visual bar chart for top 10 countries
+corona --bar --limit 10
+
+# Deaths comparison
+corona --bar --sort deaths
+```
+</CodeGroup>
+
+## Combining options
+
+You can combine multiple options in a single command:
+
+```bash
+# China data with single color and sorted by cases
+corona china -x -s cases
+
+# Top 5 countries by deaths with reversed order
+corona --sort deaths --limit 5 --reverse
+
+# USA chart with logarithmic scale
+corona usa --chart --log
+
+# Bar chart for critical cases, top 10
+corona --bar --sort critical --limit 10
+```
+
+## Getting help
+
+Display the help information anytime:
+
+```bash
+corona help
+corona --help
+```

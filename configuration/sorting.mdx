@@ -1,0 +1,111 @@
+---
+title: Sorting options
+description: Configure how Corona CLI sorts and orders COVID-19 data results
+---
+
+Corona CLI provides flexible sorting options to organize COVID-19 data by different metrics. You can sort by various statistics and reverse the order as needed.
+
+## Sort flag
+
+<ParamField path="--sort" type="string" default="cases">
+  Sort data by a specific metric. Use the `-s` alias for shorthand.
+</ParamField>
+
+### Available sort types
+
+You can sort data by any of the following metrics:
+
+| Sort Type | Description |
+|-----------|-------------|
+| `country` | Sort alphabetically by country name |
+| `cases` | Sort by total confirmed cases |
+| `cases-today` | Sort by new cases reported today |
+| `deaths` | Sort by total death count |
+| `deaths-today` | Sort by new deaths reported today |
+| `recovered` | Sort by total recovered cases |
+| `active` | Sort by currently active cases |
+| `critical` | Sort by critical condition cases |
+| `per-million` | Sort by cases per million population |
+
+### Examples
+
+Sort by total cases (default):
+```bash
+corona --sort cases
+corona -s cases
+```
+
+Sort by deaths:
+```bash
+corona --sort deaths
+corona -s deaths
+```
+
+Sort by active cases:
+```bash
+corona --sort active
+corona -s active
+```
+
+Sort US states data by cases today:
+```bash
+corona states --sort cases-today
+corona states -s cases-today
+```
+
+Sort by critical cases:
+```bash
+corona --sort critical
+corona -s critical
+```
+
+Sort by per million statistics:
+```bash
+corona --sort per-million
+corona -s per-million
+```
+
+## Reverse flag
+
+<ParamField path="--reverse" type="boolean" default="false">
+  Reverse the sort order. Use the `-r` alias for shorthand.
+</ParamField>
+
+The `--reverse` flag inverts the normal sort order, allowing you to see data from lowest to highest instead of highest to lowest.
+
+### Examples
+
+Reverse sort by active cases:
+```bash
+corona --sort active --reverse
+corona -s active -r
+```
+
+Show countries with lowest death counts first:
+```bash
+corona --sort deaths --reverse
+corona -s deaths -r
+```
+
+## Combined sorting examples
+
+Sort and limit results:
+```bash
+# Show top 10 countries by cases
+corona --sort cases --limit 10
+corona -s cases -l 10
+```
+
+Sort with bar charts:
+```bash
+# Show top 5 countries by deaths as bar charts
+corona --bar --sort deaths --limit 5
+corona -b -s deaths -l 5
+```
+
+Sort with single color output:
+```bash
+# Sort by recovered cases with minimal styling
+corona --sort recovered --xcolor
+corona -s recovered -x
+```

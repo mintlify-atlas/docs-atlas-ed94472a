@@ -1,0 +1,121 @@
+---
+title: Output options
+description: Customize the display format and styling of Corona CLI output
+---
+
+Corona CLI offers several output formatting options to customize how COVID-19 data is displayed in your terminal.
+
+## Minimal output
+
+<ParamField path="--minimal" type="boolean" default="false">
+  Display a bare bones table with minimal information. Use the `-m` alias for shorthand.
+</ParamField>
+
+The `--minimal` flag strips away extra formatting and displays only the essential data in a compact table format.
+
+### Examples
+
+Basic minimal output:
+```bash
+corona --minimal
+corona -m
+```
+
+Minimal output with sorting:
+```bash
+corona --minimal --sort deaths
+corona -m -s deaths
+```
+
+Minimal output for a specific country:
+```bash
+corona china --minimal
+corona usa -m
+```
+
+## JSON output
+
+<ParamField path="--json" type="boolean" default="false">
+  Output data in JSON format only. Use the `-j` alias for shorthand.
+</ParamField>
+
+The `--json` flag returns raw JSON data instead of formatted tables, making it easy to pipe data to other tools or scripts.
+
+### Examples
+
+Get JSON output for all countries:
+```bash
+corona --json
+corona -j
+```
+
+Get JSON output for a specific country:
+```bash
+corona china --json
+corona usa -j
+```
+
+Get JSON output for US states:
+```bash
+corona states --json
+corona states -j
+```
+
+Pipe JSON to another tool:
+```bash
+# Example: Use jq to filter JSON data
+corona --json | jq '.[] | select(.country == "USA")'
+```
+
+## Single color output
+
+<ParamField path="--xcolor" type="boolean" default="false">
+  Display output in a single color instead of multi-colored output. Use the `-x` alias for shorthand.
+</ParamField>
+
+The `--xcolor` flag disables the default multi-color output and uses a single color scheme, which can be useful for terminals with limited color support or for accessibility purposes.
+
+### Examples
+
+Basic single color output:
+```bash
+corona --xcolor
+corona -x
+```
+
+Single color output with sorting:
+```bash
+corona --xcolor --sort active
+corona -x -s active
+```
+
+Single color output for a specific country:
+```bash
+corona china --xcolor
+corona usa -x
+```
+
+## Combining output options
+
+You can combine multiple output options to customize the display exactly how you need it:
+
+```bash
+# Minimal output with single color
+corona --minimal --xcolor
+corona -m -x
+
+# Sort and display in single color
+corona --sort deaths --xcolor --limit 10
+corona -s deaths -x -l 10
+
+# Combine with other flags
+corona china --xcolor --sort cases
+corona -x -s cases
+```
+
+## Output formatting tips
+
+- Use `--minimal` when you need quick, compact data without extra formatting
+- Use `--json` when integrating with scripts or other command-line tools
+- Use `--xcolor` for better compatibility with terminals that have limited color support
+- Combine flags to create custom output formats that match your workflow

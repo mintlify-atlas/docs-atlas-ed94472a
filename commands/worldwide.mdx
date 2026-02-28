@@ -1,0 +1,239 @@
+---
+title: Worldwide data
+description: Display COVID-19 statistics for all countries around the world
+---
+
+The default Corona CLI command displays COVID-19 statistics for all countries worldwide. When you run `corona` without any arguments, it fetches and displays a comprehensive table of data for every country.
+
+## Basic usage
+
+```bash
+corona
+```
+
+This displays a color-coded table with the following columns:
+- Country name
+- Total cases
+- Cases reported today
+- Total deaths
+- Deaths reported today
+- Recovered cases
+- Active cases
+- Critical cases
+- Cases per million population
+
+## Display options
+
+### Single color output
+
+By default, the table uses color coding for better readability. To display in a single color:
+
+```bash
+corona --xcolor
+corona -x
+```
+
+### Minimal output
+
+For a bare-bones table without additional information:
+
+```bash
+corona --minimal
+corona -m
+```
+
+### JSON output
+
+Get raw data in JSON format for programmatic use:
+
+```bash
+corona --json
+corona -j
+```
+
+## Sorting data
+
+<ParamField path="sort" type="string" default="cases">
+  Sort the worldwide data by any field
+</ParamField>
+
+<CodeGroup>
+```bash By total cases (default)
+corona
+corona --sort cases
+corona -s cases
+```
+
+```bash By deaths
+corona --sort deaths
+corona -s deaths
+```
+
+```bash By new cases today
+corona --sort cases-today
+corona -s cases-today
+```
+
+```bash By recovered
+corona --sort recovered
+corona -s recovered
+```
+
+```bash By active cases
+corona --sort active
+corona -s active
+```
+
+```bash By critical cases
+corona --sort critical
+corona -s critical
+```
+
+```bash By cases per million
+corona --sort per-million
+corona -s per-million
+```
+
+```bash Alphabetically by country
+corona --sort country
+corona -s country
+```
+</CodeGroup>
+
+## Filtering results
+
+### Limit entries
+
+Display only the top N countries:
+
+```bash
+# Top 10 countries
+corona --limit 10
+corona -l 10
+
+# Top 5 by deaths
+corona --sort deaths --limit 5
+corona -s deaths -l 5
+```
+
+### Reverse order
+
+Reverse the sort order to see countries with lowest values:
+
+```bash
+# Countries with lowest cases
+corona --sort cases --reverse
+corona -s cases -r
+
+# Bottom 10 by active cases
+corona --sort active --reverse --limit 10
+corona -s active -r -l 10
+```
+
+## Visual representations
+
+### Bar charts
+
+Display data as bar charts for visual comparison:
+
+```bash
+# Default bar chart (top 10 countries by cases)
+corona --bar
+corona -b
+
+# Top 5 countries by deaths
+corona --bar --sort deaths --limit 5
+corona -b -s deaths -l 5
+
+# Critical cases comparison
+corona --bar --sort critical
+corona -b -s critical
+
+# Recovered cases for top 10
+corona --bar --sort recovered --limit 10
+corona -b -s recovered -l 10
+```
+
+## Real-world examples
+
+<CodeGroup>
+```bash Example 1: Top 10 affected countries
+corona --limit 10
+```
+
+```bash Example 2: Deaths analysis
+# Top 15 countries by total deaths
+corona --sort deaths --limit 15
+```
+
+```bash Example 3: Active cases monitoring
+# Top 20 countries by active cases
+corona --sort active --limit 20
+```
+
+```bash Example 4: New cases today
+# Countries with most new cases reported today
+corona --sort cases-today --limit 10
+```
+
+```bash Example 5: Visual comparison
+# Bar chart of top 8 countries by cases
+corona --bar --limit 8
+```
+
+```bash Example 6: Export to JSON
+# Get data in JSON format for processing
+corona --json > covid-data.json
+```
+
+```bash Example 7: Minimal display
+# Clean output for scripting
+corona --minimal --limit 10
+```
+
+```bash Example 8: Combined options
+# Top 5 deaths, reversed, single color
+corona -s deaths -l 5 -r -x
+```
+</CodeGroup>
+
+## Understanding the output
+
+The table displays the following information:
+
+- **Country**: Country or region name
+- **Cases**: Total confirmed COVID-19 cases since the beginning
+- **Cases (Today)**: New cases reported in the last 24 hours
+- **Deaths**: Total deaths attributed to COVID-19
+- **Deaths (Today)**: New deaths reported in the last 24 hours
+- **Recovered**: Total number of recovered patients
+- **Active**: Currently active cases (Cases - Deaths - Recovered)
+- **Critical**: Number of patients in critical condition
+- **Per Million**: Cases per million population (normalized metric)
+
+<Note>
+The data is updated regularly from multiple sources including WHO, CDC, and national health organizations. The last update timestamp is displayed at the bottom of the output.
+</Note>
+
+## Tips
+
+<Tip>
+Combine `--sort` and `--limit` to focus on the most affected regions:
+```bash
+corona --sort deaths --limit 10
+```
+</Tip>
+
+<Tip>
+Use `--json` output with tools like `jq` for advanced filtering:
+```bash
+corona --json | jq '.[] | select(.country == "USA")'
+```
+</Tip>
+
+<Tip>
+The `--bar` option is great for presentations and quick visual comparisons:
+```bash
+corona --bar --sort critical --limit 10
+```
+</Tip>

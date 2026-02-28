@@ -1,0 +1,195 @@
+---
+title: Configuration flags reference
+description: Complete reference of all available Corona CLI configuration flags
+---
+
+This page provides a comprehensive reference of all configuration flags available in Corona CLI.
+
+## All flags
+
+### Sort
+
+<ParamField path="--sort" type="string" default="cases">
+  Sort data by a specific metric type. Alias: `-s`
+  
+  **Valid values:** `country`, `cases`, `cases-today`, `deaths`, `deaths-today`, `recovered`, `active`, `critical`, `per-million`
+</ParamField>
+
+```bash
+corona --sort deaths
+corona -s active
+```
+
+### Reverse
+
+<ParamField path="--reverse" type="boolean" default="false">
+  Reverse the sort order of the data. Alias: `-r`
+</ParamField>
+
+```bash
+corona --sort cases --reverse
+corona -s cases -r
+```
+
+### Limit
+
+<ParamField path="--limit" type="number" default="Unlimited">
+  Limit the number of entries displayed in the output. Alias: `-l`
+</ParamField>
+
+```bash
+corona --limit 10
+corona -l 5
+```
+
+### Bar charts
+
+<ParamField path="--bar" type="boolean" default="false">
+  Display statistics as bar charts instead of tables. Alias: `-b`
+</ParamField>
+
+```bash
+corona --bar
+corona -b --sort deaths --limit 5
+```
+
+### Line charts
+
+<ParamField path="--chart" type="boolean" default="false">
+  Display a line chart for a specific country's statistics over time. Alias: `-c`
+  
+  **Note:** This flag requires a country name to be specified.
+</ParamField>
+
+```bash
+corona china --chart
+corona usa -c
+```
+
+### Logarithmic charts
+
+<ParamField path="--log" type="boolean" default="false">
+  Display charts with logarithmic scale. Alias: `-g`
+  
+  **Note:** This flag must be used together with the `--chart` flag.
+</ParamField>
+
+```bash
+corona china --chart --log
+corona usa -c -g
+```
+
+### Minimal output
+
+<ParamField path="--minimal" type="boolean" default="false">
+  Display a minimalistic table with bare bones information. Alias: `-m`
+</ParamField>
+
+```bash
+corona --minimal
+corona -m
+```
+
+### JSON output
+
+<ParamField path="--json" type="boolean" default="false">
+  Output data in JSON format only. Alias: `-j`
+</ParamField>
+
+```bash
+corona --json
+corona -j
+```
+
+### Single color output
+
+<ParamField path="--xcolor" type="boolean" default="false">
+  Display output in a single color instead of multiple colors. Alias: `-x`
+</ParamField>
+
+```bash
+corona --xcolor
+corona -x
+```
+
+## Flag reference table
+
+| Flag | Alias | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `--sort` | `-s` | string | `cases` | Sort data by metric type |
+| `--reverse` | `-r` | boolean | `false` | Reverse sort order |
+| `--limit` | `-l` | number | Unlimited | Limit number of entries |
+| `--bar` | `-b` | boolean | `false` | Display as bar charts |
+| `--chart` | `-c` | boolean | `false` | Display line chart for country |
+| `--log` | `-g` | boolean | `false` | Use logarithmic scale for charts |
+| `--minimal` | `-m` | boolean | `false` | Minimalistic output |
+| `--json` | `-j` | boolean | `false` | JSON format output |
+| `--xcolor` | `-x` | boolean | `false` | Single color output |
+
+## Common flag combinations
+
+### Data analysis
+
+```bash
+# Top 10 countries by deaths
+corona --sort deaths --limit 10
+corona -s deaths -l 10
+
+# Bar chart of top 5 critical cases
+corona --bar --sort critical --limit 5
+corona -b -s critical -l 5
+```
+
+### Charts and visualization
+
+```bash
+# Regular line chart for a country
+corona usa --chart
+corona china -c
+
+# Logarithmic chart for a country
+corona usa --chart --log
+corona china -c -g
+
+# Bar chart sorted by recovered cases
+corona --bar --sort recovered
+corona -b -s recovered
+```
+
+### Output formatting
+
+```bash
+# Minimal single-color output
+corona --minimal --xcolor
+corona -m -x
+
+# JSON output for piping to other tools
+corona --json | jq '.'
+corona states -j
+```
+
+### Advanced combinations
+
+```bash
+# Multiple flags for customized output
+corona --sort active --reverse --limit 15 --xcolor
+corona -s active -r -l 15 -x
+
+# US states with sorting and limiting
+corona states --sort cases-today --limit 10
+corona states -s cases-today -l 10
+
+# Country data with chart and single color
+corona china --chart --xcolor
+corona usa -c -x
+```
+
+## Usage notes
+
+- Boolean flags can be used without values (their presence enables them)
+- String and number flags require a value after the flag
+- Multiple flags can be combined in a single command
+- Order of flags does not matter
+- Aliases provide shorter alternatives to full flag names
+- Some flags like `--chart` require a country name to function
+- The `--log` flag only works when combined with `--chart`

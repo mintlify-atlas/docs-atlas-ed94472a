@@ -1,0 +1,230 @@
+---
+title: Troubleshooting
+description: Common issues and solutions for Corona CLI
+---
+
+## Common issues
+
+This page covers common issues you might encounter when using Corona CLI and how to resolve them.
+
+## Installation issues
+
+<Accordion title="npm command not found">
+  This error indicates that Node.js and npm are not installed on your system.
+
+  **Solution:**
+  1. Download and install Node.js from [nodejs.org](https://nodejs.org/)
+  2. Verify installation by running:
+     ```bash
+     node --version
+     npm --version
+     ```
+  3. Try installing Corona CLI again:
+     ```bash
+     npm install -g corona-cli
+     ```
+</Accordion>
+
+<Accordion title="Permission denied errors (EACCES)">
+  You may encounter permission errors when installing global npm packages.
+
+  **Solution:**
+  
+  On macOS/Linux:
+  ```bash
+  sudo npm install -g corona-cli
+  ```
+
+  Or fix npm permissions permanently by following the [npm guide](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally).
+
+  On Windows:
+  - Run your terminal as Administrator
+  - Then install:
+    ```bash
+    npm install -g corona-cli
+    ```
+</Accordion>
+
+<Accordion title="Command not found after installation">
+  The CLI is installed but the `corona` command is not recognized.
+
+  **Solution:**
+  1. Verify the installation:
+     ```bash
+     npm list -g corona-cli
+     ```
+  2. Check your PATH includes npm global binaries:
+     ```bash
+     npm config get prefix
+     ```
+  3. Add npm's global bin directory to your PATH if needed
+  4. Restart your terminal and try again
+</Accordion>
+
+## Node.js version issues
+
+<Warning>
+  Corona CLI requires Node.js version 12 or higher.
+</Warning>
+
+<Accordion title="Unsupported Node.js version">
+  If you see errors about unsupported Node.js version, you need to upgrade.
+
+  **Solution:**
+  1. Check your current Node.js version:
+     ```bash
+     node --version
+     ```
+  2. If it's below v12.x, upgrade Node.js:
+     - Download from [nodejs.org](https://nodejs.org/)
+     - Or use [nvm](https://github.com/nvm-sh/nvm) (recommended):
+       ```bash
+       nvm install --lts
+       nvm use --lts
+       ```
+  3. Verify the new version:
+     ```bash
+     node --version
+     ```
+</Accordion>
+
+## Network and API issues
+
+<Accordion title="Network request failed or timeout">
+  The CLI cannot connect to the data API.
+
+  **Solution:**
+  1. Check your internet connection
+  2. Verify you can access external websites
+  3. Check if you're behind a proxy or firewall:
+     - Configure npm proxy settings if needed:
+       ```bash
+       npm config set proxy http://proxy.company.com:8080
+       npm config set https-proxy http://proxy.company.com:8080
+       ```
+  4. Try again after a few minutes in case of temporary API issues
+</Accordion>
+
+<Accordion title="API down or unavailable">
+  The data source API may occasionally be unavailable.
+
+  **Solution:**
+  - Wait a few minutes and try again
+  - The CLI will display an appropriate error message if the API is down
+  - Check [NovelCOVID API status](https://disease.sh/) for known issues
+</Accordion>
+
+<Accordion title="Data not loading or showing errors">
+  The CLI shows errors when fetching data.
+
+  **Solution:**
+  1. Update to the latest version:
+     ```bash
+     npm update -g corona-cli
+     ```
+  2. Clear npm cache if needed:
+     ```bash
+     npm cache clean --force
+     ```
+  3. Reinstall the CLI:
+     ```bash
+     npm uninstall -g corona-cli
+     npm install -g corona-cli
+     ```
+</Accordion>
+
+## Data display issues
+
+<Accordion title="Country not found">
+  The CLI reports that a country name is not recognized.
+
+  **Solution:**
+  - Check the spelling of the country name
+  - Try common variations (e.g., "USA" instead of "United States")
+  - Use the full country name without special characters
+  - Run `corona` without arguments to see all available countries
+</Accordion>
+
+<Accordion title="Terminal display issues or garbled output">
+  The output appears broken or incorrectly formatted.
+
+  **Solution:**
+  1. Ensure your terminal supports UTF-8 encoding
+  2. Try resizing your terminal window to be wider
+  3. Use the `--minimal` flag for simpler output:
+     ```bash
+     corona --minimal
+     ```
+  4. Use the `--xcolor` flag to disable colors:
+     ```bash
+     corona --xcolor
+     ```
+</Accordion>
+
+<Accordion title="Charts not displaying correctly">
+  Line charts or bar charts appear broken.
+
+  **Solution:**
+  1. Make your terminal window larger
+  2. Ensure your terminal emulator supports Unicode characters
+  3. Try a different terminal emulator if issues persist
+  4. Use the basic table view instead of charts:
+     ```bash
+     corona usa
+     ```
+</Accordion>
+
+## Update issues
+
+<Accordion title="Update notifications not working">
+  You're not seeing notifications about new versions.
+
+  **Solution:**
+  - Manually check for updates:
+    ```bash
+    npm outdated -g corona-cli
+    ```
+  - Update to the latest version:
+    ```bash
+    npm update -g corona-cli
+    ```
+</Accordion>
+
+<Accordion title="Update fails or hangs">
+  The update process doesn't complete successfully.
+
+  **Solution:**
+  1. Try uninstalling and reinstalling:
+     ```bash
+     npm uninstall -g corona-cli
+     npm install -g corona-cli
+     ```
+  2. Clear npm cache:
+     ```bash
+     npm cache clean --force
+     ```
+  3. Check for npm permission issues (see Installation issues above)
+</Accordion>
+
+## Getting help
+
+<Info>
+  If you encounter an issue not covered here, you can:
+  - Check the [changelog](/changelog) for recent fixes
+  - Report issues on [GitHub](https://github.com/ahmadawais/corona-cli/issues)
+  - Review the [data sources](/data-sources) for API-related questions
+</Info>
+
+### CLI help command
+
+You can always access help directly from the CLI:
+
+```bash
+corona help
+```
+
+Or use the help flag:
+
+```bash
+corona --help
+```

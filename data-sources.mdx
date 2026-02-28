@@ -1,0 +1,142 @@
+---
+title: Data sources
+description: Information about the COVID-19 data sources used by Corona CLI
+---
+
+## Primary data source
+
+Corona CLI uses the [NovelCOVID API](https://disease.sh/), which aggregates data from multiple authoritative sources to provide real-time COVID-19 statistics.
+
+<Info>
+  The NovelCOVID API is built on top of [WorldMeter](https://www.worldometers.info/coronavirus/) data, which provides frequently updated global statistics.
+</Info>
+
+## Authoritative sources
+
+The data presented by Corona CLI originates from the following authoritative health organizations and research institutions:
+
+### Global health organizations
+
+<AccordionGroup>
+  <Accordion title="World Health Organization (WHO)">
+    - [Novel Coronavirus (2019-nCoV) situation reports](https://www.who.int/emergencies/diseases/novel-coronavirus-2019/situation-reports/)
+    - Provides official global health data and situation reports
+    - Primary international health authority for COVID-19
+  </Accordion>
+
+  <Accordion title="U.S. Centers for Disease Control and Prevention (CDC)">
+    - [2019 Novel Coronavirus (2019-nCoV) in the U.S.](https://www.cdc.gov/coronavirus/2019-ncov/cases-in-us.html)
+    - [Symptoms of Novel Coronavirus (2019-nCoV)](https://www.cdc.gov/coronavirus/2019-ncov/about/symptoms.html)
+    - Leading national public health institute in the United States
+  </Accordion>
+</AccordionGroup>
+
+### National health commissions
+
+<AccordionGroup>
+  <Accordion title="National Health Commission (NHC) of China">
+    - [Outbreak Notification](http://www.nhc.gov.cn/xcs/yqtb/list_gzbd.shtml)
+    - Official health data from the People's Republic of China
+  </Accordion>
+
+  <Accordion title="Australian Government Department of Health">
+    - [Novel coronavirus (2019-nCoV)](https://www.health.gov.au/health-topics/novel-coronavirus-2019-ncov)
+    - Official Australian COVID-19 health information
+  </Accordion>
+
+  <Accordion title="UK Chief Medical Officer (CMO)">
+    - [CMO confirms cases of coronavirus in England](https://www.gov.uk/government/news/cmo-confirms-cases-of-coronavirus-in-england)
+    - Official UK government health data
+  </Accordion>
+</AccordionGroup>
+
+### Research institutions
+
+<AccordionGroup>
+  <Accordion title="Harvard University">
+    - [Early Transmissibility Assessment of a Novel Coronavirus in Wuhan, China](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3524675)
+    - Computational Health Informatics Program research
+    - Authors: Maimuna Majumder and Kenneth D. Mandl
+  </Accordion>
+
+  <Accordion title="Imperial College London">
+    - [Report 3: Transmissibility of 2019-nCoV](https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/news--wuhan-coronavirus/)
+    - MRC Global Infectious Disease Analysis
+  </Accordion>
+
+  <Accordion title="University of Reading">
+    - [Novel coronavirus 2019-nCoV: early estimation of epidemiological parameters and epidemic prediction](https://www.medrxiv.org/content/10.1101/2020.01.23.20018549v2)
+    - Authors: Jonathan M. Read et al.
+  </Accordion>
+</AccordionGroup>
+
+### Academic journals
+
+<AccordionGroup>
+  <Accordion title="The Lancet">
+    - [A novel coronavirus outbreak of global health concern](https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30185-9/fulltext#tbl1)
+    - Authors: Chen Wang et al.
+    - Published: January 24, 2020
+  </Accordion>
+
+  <Accordion title="Journal of Medical Virology">
+    - [Updated understanding of the outbreak of 2019 novel coronavirus (2019nCoV) in Wuhan, China](https://onlinelibrary.wiley.com/doi/abs/10.1002/jmv.25689?af=R)
+    - Published: January 29, 2020
+  </Accordion>
+
+  <Accordion title="JAMA (Journal of the American Medical Association)">
+    - [Clinical Characteristics of 138 Hospitalized Patients With 2019 Novel Coronavirus–Infected Pneumonia in Wuhan, China](https://jamanetwork.com/journals/jama/fullarticle/2761044?guestAccessKey=f61bd430-07d8-4b86-a749-bec05bfffb65)
+    - Authors: Wang et al.
+    - Published: February 7, 2020
+  </Accordion>
+
+  <Accordion title="International Journal of Infectious Diseases">
+    - [Preliminary estimation of the basic reproduction number of novel coronavirus (2019-nCoV) in China, from 2019 to 2020: A data-driven analysis in the early phase of the outbreak](https://www.sciencedirect.com/science/article/pii/S1201971220300539)
+    - Published: January 30, 2020
+  </Accordion>
+</AccordionGroup>
+
+## Data aggregation
+
+<Note>
+  Corona CLI serves over 12+ billion queries by aggregating data from these authoritative sources through the NovelCOVID API, providing real-time access to:
+  - Country-level statistics
+  - US state-level data
+  - Global totals
+  - Historical trends
+</Note>
+
+## Data metrics
+
+The CLI provides the following data points:
+
+- **Cases**: Total confirmed cases
+- **Cases today**: New cases reported today
+- **Deaths**: Total deaths
+- **Deaths today**: New deaths reported today
+- **Recovered**: Total recovered cases
+- **Active**: Currently active cases
+- **Critical**: Cases in critical condition
+- **Per million**: Cases per million population
+
+## Data freshness
+
+<Warning>
+  Data is updated regularly from source organizations. The frequency of updates depends on each country's reporting schedule. Most data is updated at least once daily.
+</Warning>
+
+## Data accuracy
+
+While Corona CLI strives to provide accurate information by sourcing from authoritative organizations, please note:
+
+- Data accuracy depends on reporting from individual countries and health organizations
+- There may be delays in reporting from some regions
+- Historical data may be revised as countries update their numbers
+- For critical health decisions, always consult official health authorities
+
+## Additional resources
+
+- [WorldMeter Coronavirus tracker](https://www.worldometers.info/coronavirus/)
+- [NovelCOVID API documentation](https://disease.sh/)
+- [WHO Coronavirus Dashboard](https://www.who.int/emergencies/diseases/novel-coronavirus-2019/situation-reports/)
+- [CDC COVID-19 page](https://www.cdc.gov/coronavirus/2019-ncov/)

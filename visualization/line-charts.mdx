@@ -1,0 +1,181 @@
+---
+title: Line charts
+description: Display historical COVID-19 trends with interactive line charts using the --chart flag
+---
+
+The Corona CLI provides interactive line chart visualization to track historical COVID-19 trends for specific countries. Line charts show how cases, deaths, and recovered counts have changed over time.
+
+## Basic usage
+
+Display a line chart for a specific country:
+
+```bash
+corona usa --chart
+corona china --chart
+```
+
+Or use the short alias:
+
+```bash
+corona usa -c
+corona china -c
+```
+
+<Note>
+Line charts require a country name to be specified. They display historical timeline data which is not available for the global view or US states.
+</Note>
+
+## What is visualized
+
+Line charts display three data series over time:
+
+- **Cases** (cyan line) - Cumulative confirmed cases
+- **Deaths** (red line) - Cumulative deaths  
+- **Recovered** (green line) - Cumulative recovered cases
+
+Each series shows:
+- The metric name and final count in the legend
+- Historical trend line across all available dates
+- Date labels on the x-axis (formatted as "D MMM")
+- The country name as the chart title
+
+## Logarithmic scale
+
+Apply logarithmic scaling to line chart data for better visualization of exponential growth:
+
+```bash
+corona china --chart --log
+corona usa -c -g
+```
+
+<Tip>
+Logarithmic charts are essential for understanding exponential growth patterns. They make it easier to see rate of change and compare trends when dealing with rapidly growing numbers that span multiple orders of magnitude.
+</Tip>
+
+### When to use logarithmic scale
+
+Use the `--log` flag when:
+- Analyzing exponential growth phases
+- Comparing growth rates across different time periods
+- Viewing data that spans several orders of magnitude
+- Identifying when growth is accelerating or slowing
+
+<Info>
+The logarithmic transformation is applied as `Math.log(x)` for non-zero values. Zero values are treated as undefined to avoid mathematical errors.
+</Info>
+
+## Understanding the visualization
+
+### Time range
+
+Line charts display all available historical data from the API, typically showing:
+- Complete timeline from when the country first reported cases
+- Daily cumulative totals (not daily new cases)
+- Dates formatted for readability (e.g., "15 Jan", "20 Feb")
+
+### Legend information
+
+The chart legend shows:
+- **CASES**: Total confirmed cases (final count)
+- **DEATHS**: Total deaths (final count)  
+- **RECOVERED**: Total recovered (final count)
+
+Numbers are formatted with comma separators for readability.
+
+## Interactive controls
+
+Once the line chart is displayed, exit the visualization using:
+
+- `Escape` key
+- `q` key
+- `Ctrl+C`
+- `Enter` key
+- `Space` key
+
+## Examples
+
+<Steps>
+
+### View historical trends for a country
+
+```bash
+corona italy --chart
+```
+
+Displays the complete historical timeline of cases, deaths, and recovered for Italy.
+
+### Analyze growth rate with logarithmic scale
+
+```bash
+corona usa --chart --log
+```
+
+Shows USA data with logarithmic scaling, making exponential growth patterns more visible.
+
+### Compare different countries
+
+Run multiple charts sequentially to compare trends:
+
+```bash
+# View China's progression
+corona china --chart --log
+
+# Then view Italy's progression  
+corona italy --chart --log
+
+# Then view USA's progression
+corona usa --chart --log
+```
+
+Exit each chart to view the next one.
+
+</Steps>
+
+## Regular vs logarithmic comparison
+
+### Regular scale
+
+```bash
+corona usa --chart
+```
+
+**Best for:**
+- Seeing absolute numbers and final totals
+- Understanding the overall magnitude
+- Identifying when numbers plateau
+
+### Logarithmic scale  
+
+```bash
+corona usa --chart --log
+```
+
+**Best for:**
+- Analyzing growth rates and doubling times
+- Comparing early-stage vs late-stage growth
+- Identifying exponential vs linear growth patterns
+- Seeing trends when numbers vary by orders of magnitude
+
+## Troubleshooting
+
+### Country not found
+
+If you see an error that a country doesn't exist:
+
+- Check the spelling of the country name
+- Try common alternative names (e.g., "usa" instead of "united states")
+- Country names are case-insensitive
+- Use the format provided by the disease.sh API
+
+### No historical data
+
+Line charts require historical timeline data from the API endpoint:
+```
+https://disease.sh/v3/covid-19/historical/{countryName}
+```
+
+If historical data is unavailable for a country, the chart cannot be displayed.
+
+<Note>
+The chart visualization uses the blessed-contrib library to render interactive terminal graphics. Ensure your terminal supports proper rendering for the best experience.
+</Note>

@@ -1,0 +1,133 @@
+---
+title: Installation
+description: Install Corona CLI using npm, npx, yarn, or pnpm
+---
+
+## Requirements
+
+Before installing Corona CLI, ensure you have Node.js installed on your system:
+
+- **Node.js**: Version 12.x or higher
+
+Check your Node.js version:
+
+```bash
+node --version
+```
+
+## Installation methods
+
+Choose your preferred package manager to install Corona CLI.
+
+<CodeGroup>
+
+```bash npm
+npm install -g corona-cli
+```
+
+```bash yarn
+yarn global add corona-cli
+```
+
+```bash pnpm
+pnpm add -g corona-cli
+```
+
+```bash npx
+# No installation required - runs directly
+npx corona-cli
+```
+
+</CodeGroup>
+
+<Note>
+Global installation (using `-g` flag) is recommended so you can use the `corona` command from anywhere in your terminal.
+</Note>
+
+### Using npx (no installation)
+
+If you prefer not to install Corona CLI globally, you can run it directly with npx:
+
+```bash
+npx corona-cli
+```
+
+<Warning>
+Using `npx` will download and run the CLI on every execution, which may be slower than a global installation.
+</Warning>
+
+## Verify installation
+
+After installation, verify that Corona CLI is installed correctly:
+
+```bash
+corona --help
+```
+
+You should see the help menu with all available commands and options.
+
+## Available commands
+
+Once installed, you can use either of these commands:
+
+- `corona` - Short command
+- `corona-cli` - Full command name
+
+Both commands work identically:
+
+```bash
+corona
+corona-cli
+```
+
+## Updating Corona CLI
+
+To update to the latest version:
+
+<CodeGroup>
+
+```bash npm
+npm update -g corona-cli
+```
+
+```bash yarn
+yarn global upgrade corona-cli
+```
+
+```bash pnpm
+pnpm update -g corona-cli
+```
+
+</CodeGroup>
+
+<Tip>
+Corona CLI includes automatic update notifications. When a new version is available, you'll see a notification in your terminal.
+</Tip>
+
+## Uninstalling
+
+To remove Corona CLI from your system:
+
+<CodeGroup>
+
+```bash npm
+npm uninstall -g corona-cli
+```
+
+```bash yarn
+yarn global remove corona-cli
+```
+
+```bash pnpm
+pnpm remove -g corona-cli
+```
+
+</CodeGroup>
+
+## Next steps
+
+Now that you have Corona CLI installed, learn how to use it:
+
+<Card title="Quick start guide" icon="rocket" href="/quickstart">
+  Get started with your first Corona CLI commands
+</Card>

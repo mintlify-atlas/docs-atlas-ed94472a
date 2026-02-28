@@ -1,0 +1,289 @@
+---
+title: Country data
+description: Get detailed COVID-19 statistics for a specific country with historical charts
+---
+
+The country command allows you to view COVID-19 statistics for a specific country. This command supports all global options plus the ability to display historical charts.
+
+## Basic usage
+
+```bash
+corona <country-name>
+```
+
+Replace `<country-name>` with any country name. The CLI accepts country names in various formats.
+
+## Examples by country
+
+<CodeGroup>
+```bash China
+corona china
+```
+
+```bash United States
+corona usa
+corona "united states"
+```
+
+```bash Italy
+corona italy
+```
+
+```bash United Kingdom
+corona uk
+corona "united kingdom"
+```
+
+```bash Germany
+corona germany
+```
+
+```bash Pakistan
+corona pakistan
+```
+</CodeGroup>
+
+<Note>
+Country names are case-insensitive. You can use common abbreviations (like "usa", "uk") or full names.
+</Note>
+
+## Output format
+
+The country command displays the same statistics as the worldwide view but filtered for a single country:
+
+- Country name
+- Total cases
+- Cases reported today
+- Total deaths
+- Deaths reported today
+- Recovered cases
+- Active cases
+- Critical cases
+- Cases per million population
+
+## Display options
+
+All global display options work with country queries:
+
+<CodeGroup>
+```bash Single color
+corona china --xcolor
+corona china -x
+```
+
+```bash Minimal output
+corona usa --minimal
+corona usa -m
+```
+
+```bash JSON format
+corona italy --json
+corona italy -j
+```
+</CodeGroup>
+
+## Historical charts
+
+One of the most powerful features for country data is the ability to display historical trend charts.
+
+### Regular line chart
+
+<ParamField path="chart" type="boolean" default="false">
+  Display a historical line chart showing the progression of COVID-19 cases over time
+</ParamField>
+
+```bash
+corona <country> --chart
+corona <country> -c
+```
+
+<CodeGroup>
+```bash USA chart
+corona usa --chart
+corona usa -c
+```
+
+```bash China chart
+corona china --chart
+corona china -c
+```
+
+```bash Italy chart
+corona italy --chart
+corona italy -c
+```
+</CodeGroup>
+
+### Logarithmic scale chart
+
+<ParamField path="log" type="boolean" default="false">
+  Display the chart using a logarithmic scale, useful for comparing exponential growth patterns
+</ParamField>
+
+For countries with exponential growth, a logarithmic chart can be more informative:
+
+```bash
+corona <country> --chart --log
+corona <country> -c -g
+```
+
+<CodeGroup>
+```bash China logarithmic
+corona china --chart --log
+corona china -c -g
+```
+
+```bash USA logarithmic
+corona usa --chart --log
+corona usa -c -g
+```
+</CodeGroup>
+
+<Note>
+The `--log` flag only works in combination with `--chart`. It has no effect without the chart option.
+</Note>
+
+## Combining options
+
+You can combine multiple options with country commands:
+
+<CodeGroup>
+```bash Single color chart
+# Display China's chart in single color
+corona china --chart --xcolor
+corona china -c -x
+```
+
+```bash Logarithmic chart, single color
+# USA logarithmic chart, monochrome
+corona usa --chart --log --xcolor
+corona usa -c -g -x
+```
+
+```bash Minimal with JSON
+# Get USA data in JSON with minimal output
+corona usa --json --minimal
+corona usa -j -m
+```
+
+```bash All options combined
+# China data with all display options
+corona china -x -m -c -g
+```
+</CodeGroup>
+
+## Sorting with country data
+
+While sorting is primarily useful for multiple countries, you can still use sort options when querying a single country (though it won't affect single-country output):
+
+```bash
+corona usa --sort cases
+corona china -s deaths
+```
+
+## Real-world use cases
+
+<CodeGroup>
+```bash Daily monitoring
+# Check USA statistics every morning
+corona usa
+```
+
+```bash Trend analysis
+# Analyze China's case progression
+corona china --chart
+```
+
+```bash Growth pattern comparison
+# Compare exponential growth using log scale
+corona italy --chart --log
+corona usa --chart --log
+```
+
+```bash Data export
+# Export country data for analysis
+corona germany --json > germany-covid.json
+```
+
+```bash Clean terminal output
+# Minimal display for scripting
+corona uk --minimal
+```
+
+```bash Presentation mode
+# Single color chart for screenshots
+corona china --chart --xcolor
+```
+</CodeGroup>
+
+## Chart interpretation
+
+The historical charts display:
+
+- **X-axis**: Timeline (dates)
+- **Y-axis**: Number of cases
+- **Line graph**: Shows the progression of total cases over time
+
+### Regular vs logarithmic scale
+
+**Regular scale** (`--chart`):
+- Best for viewing absolute numbers
+- Shows the actual magnitude of cases
+- Easier to understand for most users
+
+**Logarithmic scale** (`--chart --log`):
+- Best for comparing growth rates
+- Makes exponential growth patterns more visible
+- Useful for epidemiological analysis
+- Each step on the y-axis represents a multiplication (e.g., 10x, 100x, 1000x)
+
+## Tips
+
+<Tip>
+Use charts to identify trend changes:
+```bash
+corona italy --chart
+```
+Look for flattening curves which indicate slowing spread.
+</Tip>
+
+<Tip>
+Compare multiple countries by running commands in sequence:
+```bash
+corona usa --chart
+corona china --chart
+corona italy --chart
+```
+</Tip>
+
+<Tip>
+For scientific analysis, use logarithmic scale:
+```bash
+corona usa --chart --log
+```
+This helps identify if growth is truly exponential.
+</Tip>
+
+<Tip>
+Export data for your own visualizations:
+```bash
+corona usa --json | jq '.' > usa-data.json
+```
+</Tip>
+
+## Common country name variations
+
+The CLI accepts various formats for country names:
+
+- **USA**: `usa`, `united states`, `us`
+- **UK**: `uk`, `united kingdom`, `britain`
+- **South Korea**: `south korea`, `korea south`, `s korea`
+- **UAE**: `uae`, `united arab emirates`
+
+<Note>
+If a country name contains spaces, you can either use quotes or camelCase:
+```bash
+corona "south korea"
+corona southkorea
+```
+</Note>
