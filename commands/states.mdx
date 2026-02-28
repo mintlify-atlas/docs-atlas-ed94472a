@@ -19,7 +19,6 @@ This displays a comprehensive table with COVID-19 data for all US states, includ
 - Total deaths
 - Deaths reported today
 - Active cases
-- Cases per million population
 
 ## Display options
 
@@ -79,15 +78,6 @@ corona states -s deaths-today
 ```bash By active cases
 corona states --sort active
 corona states -s active
-```
-
-```bash By cases per million
-corona states --sort per-million
-corona states -s per-million
-```
-
-```bash Alphabetically
-corona states --sort state
 ```
 </CodeGroup>
 
@@ -173,10 +163,10 @@ corona states --sort active --limit 20
 corona states -s active -l 20
 ```
 
-```bash Example 5: Population-adjusted view
-# States by cases per million (normalized)
-corona states --sort per-million --limit 15
-corona states -s per-million -l 15
+```bash Example 5: Deaths today tracking
+# States with most deaths reported today
+corona states --sort deaths-today --limit 15
+corona states -s deaths-today -l 15
 ```
 
 ```bash Example 6: Visual comparison
@@ -218,7 +208,6 @@ The states table includes:
 - **Deaths**: Total deaths attributed to COVID-19
 - **Deaths (Today)**: New deaths reported in the last 24 hours
 - **Active**: Currently active cases in the state
-- **Per Million**: Cases per million residents (population-normalized)
 
 <Note>
 The states data includes all 50 US states plus territories like Puerto Rico, Guam, US Virgin Islands, and others.
@@ -237,11 +226,11 @@ corona states --sort cases --limit 10
 
 ### Comparative analysis
 
-Compare states with similar populations:
+Compare states by different metrics:
 
 ```bash
-# Use per-million metric for fair comparison
-corona states --sort per-million --limit 20
+# Compare by active cases
+corona states --sort active --limit 20
 ```
 
 ### Hotspot identification
@@ -297,9 +286,9 @@ corona states --sort cases-today --limit 10
 </Tip>
 
 <Tip>
-For fair comparisons between states of different sizes, use per-million metric:
+Compare active cases across states to see current healthcare burden:
 ```bash
-corona states --sort per-million
+corona states --sort active
 ```
 </Tip>
 
@@ -339,19 +328,19 @@ Data is updated regularly throughout the day. The last update timestamp is displ
 
 ## Frequently compared metrics
 
-### Total cases vs cases per million
+### Total cases vs new cases today
 
-**Total cases** shows absolute numbers:
+**Total cases** shows cumulative numbers:
 ```bash
 corona states --sort cases
 ```
 
-**Cases per million** normalizes by population:
+**Cases today** shows current daily trends:
 ```bash
-corona states --sort per-million
+corona states --sort cases-today
 ```
 
-Use per-million for fair comparisons between states with different populations.
+Use "cases today" to identify states with current outbreak acceleration.
 
 ### Active cases vs total cases
 
