@@ -1,0 +1,76 @@
+{
+  "projectType": "cli-tool",
+  "projectName": "Corona CLI",
+  "projectDescription": "Track the Coronavirus disease (COVID-19) in the command line with real-time data for worldwide countries and US states.",
+  "theme": "aspen",
+  "primaryColor": "#E63946",
+  "lightColor": null,
+  "darkColor": null,
+  "navigation": {
+    "groups": [
+      {
+        "group": "Get Started",
+        "pages": [
+          "introduction",
+          "installation",
+          "quickstart"
+        ]
+      },
+      {
+        "group": "Commands",
+        "pages": [
+          "commands/overview",
+          "commands/worldwide",
+          "commands/country",
+          "commands/states"
+        ]
+      },
+      {
+        "group": "Visualization",
+        "pages": [
+          "visualization/bar-charts",
+          "visualization/line-charts"
+        ]
+      },
+      {
+        "group": "Configuration",
+        "pages": [
+          "configuration/sorting",
+          "configuration/output-options",
+          "configuration/flags"
+        ]
+      },
+      {
+        "group": "Additional Resources",
+        "pages": [
+          "troubleshooting",
+          "data-sources",
+          "changelog"
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Real-time COVID-19 data for all countries worldwide",
+    "US states-specific coronavirus statistics",
+    "Interactive bar and line chart visualizations",
+    "Flexible sorting and filtering options",
+    "Multiple output formats (table, minimal, JSON)",
+    "Logarithmic chart support for data analysis",
+    "Fast response time under 100ms"
+  ],
+  "publicApiSurface": [
+    "corona - Display worldwide COVID-19 data",
+    "corona <country-name> - Get data for a specific country",
+    "corona states - Get data for all US states",
+    "corona --sort <type> - Sort data by cases, deaths, recovered, etc.",
+    "corona --bar - Display bar chart visualization",
+    "corona --chart - Display line chart for a country",
+    "corona --log - Display logarithmic chart",
+    "corona --limit <n> - Limit output to N entries",
+    "corona --minimal - Minimalistic output format",
+    "corona --json - Output data in JSON format",
+    "corona --xcolor - Single-colored output",
+    "corona --reverse - Reverse sort order"
+  ]
+}
